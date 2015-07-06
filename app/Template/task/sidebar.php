@@ -28,15 +28,6 @@
             <?= $this->url->link(t('Edit the description'), 'task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li>
-            <?= $this->url->link(t('Edit recurrence'), 'task', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
-        <li>
-            <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
-        <li>
-            <?= $this->url->link(t('Add a link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
-        <li>
             <?= $this->url->link(t('Add a comment'), 'comment', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li>
