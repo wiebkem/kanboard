@@ -1,4 +1,3 @@
-<?php if (! empty($comments)): ?>
 <div id="comments" class="task-show-section">
     <div class="page-header">
         <h2><?= t('Comments') ?></h2>
@@ -26,4 +25,3 @@
         )) ?>
     <?php endif ?>
 </div>
-<?php endif ?>

@@ -2,6 +2,7 @@ var Kanboard = (function() {
 
     jQuery(document).ready(function() {
         Kanboard.Init();
+        Kanboard.OpenPopoverAutomatically();
     });
 
     return {
@@ -59,6 +60,14 @@ var Kanboard = (function() {
                     callback();
                 }
             });
+        },
+
+        // Display a popup automatically
+        OpenPopoverAutomatically: function(key, url) {
+            var parameter = GetURLParameter(key);
+            if (parameter != null) {
+                Kanboard.OpenPopover(url, Kanboard.InitAfterAjax);
+            }
         },
 
         // Return true if the page is visible
@@ -347,5 +356,16 @@ var Kanboard = (function() {
             }
         }
     };
+
+    function GetURLParameter(parameter) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == parameter) {
+                return sParameterName[1];
+            }
+        }
+    }
 
 })();
