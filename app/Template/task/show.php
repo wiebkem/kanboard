@@ -1,8 +1,7 @@
 <section id="main">
-    <div class="page-header">
-        <h2><?= $this->e('#'.$task['id'].' '.$task['title']) ?></h2>
-    </div>
-    <section class="sidebar-container" id="task-section">
+        <div class="page-header">
+            <h2><?= $this->e('#'.$task['id'].' '.$task['title']) ?></h2>
+        </div>
         <div class="task-details" style="float:left; width: 50%">
             <?= $this->render('task/show_description', array('task' => $task)) ?>
             <?= $this->render('tasklink/show', array('task' => $task, 'links' => $links, 'link_label_list' => $link_label_list)) ?>
@@ -14,5 +13,16 @@
         <div class="task-basic-details" style="float:right; width: 45%">
             <?= $this->render('task/show_basic_details', array('task' => $task, 'project' => $project)) ?>
         </div>
-    </section>
+
+    <form method="post" action="<?= $this->url->href('task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off" class="form-task">
+        <div class="page-footer">
+            <div class="form-actions" style="float: right">
+                <input type="submit" value="<?= t('Edit') ?>" class="form-task btn btn-blue"/>
+                <?php if (! isset($skip_cancel)): ?>
+                    <?= t('or') ?>
+                    <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
+                <?php endif ?>
+            </div>
+        </div>
+    </form>
 </section>

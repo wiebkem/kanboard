@@ -27,7 +27,7 @@
     <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <input type="submit" value="<?= t('Save') ?>" class="form-comment btn btn-blue"/>
         <?php if (! isset($skip_cancel)): ?>
             <?= t('or') ?>
             <?php if (isset($ajax)): ?>

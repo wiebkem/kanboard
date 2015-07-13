@@ -5,7 +5,6 @@
     <?php endif ?>
 
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('id', $values) ?>
 
     <?= $this->form->label(t('Start date'), 'date_started') ?>
     <?= $this->form->text('date_started', $values, array(), array('placeholder="'.$this->text->in($date_format, $date_formats).'"'), 'form-datetime') ?>

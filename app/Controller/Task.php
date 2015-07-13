@@ -66,8 +66,7 @@ class Task extends Base
 
         $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
 
-        $string = $this->template->render('task/show', array(
-            'task' => 'showPopup',
+        $this->response->html($this->template->render('task/show', array(
             'project' => $this->project->getById($task['project_id']),
             'files' => $this->file->getAllDocuments($task['id']),
             'images' => $this->file->getAllImages($task['id']),
@@ -85,9 +84,7 @@ class Task extends Base
             'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
             'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
             'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
-        ));
-
-        $this->response->html($string);
+        )));
     }
 
     /**
@@ -197,6 +194,7 @@ class Task extends Base
         $this->dateParser->format($values, array('date_due'));
 
         $params = array(
+            'task' => 'edit',
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -213,8 +211,7 @@ class Task extends Base
         }
         else {
             $this->response->html($this->taskLayout('task/edit', $params));
-        }
-    }
+        }    }
 
     /**
      * Validate and update a task

@@ -1,11 +1,9 @@
-<div class="page-header">
-    <h2><?= t('Edit the description') ?></h2>
-</div>
-
-<form method="post" action="<?= $this->url->href('task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<div id="description" class="task-show-section">
+    <div class="page-header">
+        <h2><?= t('Edit the description') ?></h2>
+    </div>
 
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('id', $values) ?>
 
     <div class="form-tabs">
         <ul class="form-tabs-nav">
@@ -25,14 +23,4 @@
     </div>
 
     <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
-
-    <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-        <?= t('or') ?>
-        <?php if ($ajax): ?>
-            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
-        <?php else: ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        <?php endif ?>
-    </div>
-</form>
+</div>
