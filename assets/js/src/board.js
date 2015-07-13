@@ -65,9 +65,7 @@
 
         // Redirect to the task details page
         $("#board").on("click", ".task-board", function() {
-            var url = $(this).data("task-url");
-            console.log(url);
-            Kanboard.OpenPopover(url);
+            Kanboard.OpenPopover($(this).data("task-url"));
         });
 
         // Tooltips for tasks
