@@ -118,12 +118,12 @@ class Comment extends Base
         $task = $this->getTask();
         $comment = $this->getComment();
 
-        $this->response->html($this->taskLayout('comment/edit', array(
+        $this->response->html($this->template->render('comment/edit', array(
             'values' => empty($values) ? $comment : $values,
             'errors' => $errors,
             'comment' => $comment,
             'task' => $task,
-            'title' => t('Edit a comment')
+            'title' => t('Edit a comment'),
         )));
     }
 
@@ -149,7 +149,7 @@ class Comment extends Base
                 $this->session->flashError(t('Unable to update your comment.'));
             }
 
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comment-'.$comment['id']));
+            $this->response->redirect($this->helper->url->to('board', 'show', array('popup' => 'true', 'task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment-'.$comment['id'])));
         }
 
         $this->edit($values, $errors);
@@ -165,7 +165,7 @@ class Comment extends Base
         $task = $this->getTask();
         $comment = $this->getComment();
 
-        $this->response->html($this->taskLayout('comment/remove', array(
+        $this->response->html($this->template->render('comment/remove', array(
             'comment' => $comment,
             'task' => $task,
             'title' => t('Remove a comment')
@@ -190,6 +190,6 @@ class Comment extends Base
             $this->session->flashError(t('Unable to remove this comment.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
+        $this->response->redirect($this->helper->url->to('board', 'show', array('popup' => 'true', 'task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
     }
 }

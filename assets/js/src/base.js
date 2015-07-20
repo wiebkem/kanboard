@@ -3,6 +3,7 @@ var Kanboard = (function() {
     jQuery(document).ready(function() {
         Kanboard.Init();
         var parameter = GetURLParameter('popup=true');
+        Kanboard.OpenCommentPopoverAutomatically();
         Kanboard.OpenTaskPopoverAutomatically();
     });
 
@@ -63,12 +64,35 @@ var Kanboard = (function() {
             });
         },
 
-        // Display a popup automatically
+        // Display a task popup automatically
         OpenTaskPopoverAutomatically: function() {
             var redirect = GetURLParameter('popup');
             if (redirect != null) {
                 var urlVariables = GetURLStrings('popup=true');
                 var popoverUrl = '?controller=task&action=show' + urlVariables[1];
+                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
+            }
+        },
+
+        // Display a comment popup automatically
+        OpenCommentPopoverAutomatically: function() {
+            console.log('juhuuuuuuu');
+            var redirect = GetURLParameter('comment');
+            console.log(redirect);
+            if (redirect != null) {
+                var urlVariables = GetURLStrings('comment=remove');
+                console.log(urlVariables);
+                var popoverUrl = '?controller=comment&action=confirm' + urlVariables[1];
+                console.log('popoverUrl: ' + popoverUrl);
+                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
+            }
+            redirect = GetURLParameter('comment');
+            console.log(redirect);
+            if (redirect != null) {
+                var urlVariables = GetURLStrings('comment=edit');
+                console.log(urlVariables);
+                var popoverUrl = '?controller=comment&action=edit' + urlVariables[1];
+                console.log('popoverUrl: ' + popoverUrl);
                 Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
             }
         },
@@ -390,11 +414,15 @@ var Kanboard = (function() {
     };
 
     function GetURLParameter(parameter) {
+        console.log(parameter);
         var sPageURL = window.location.search.substring(1);
+        console.log(sPageURL);
         var sURLVariables = sPageURL.split('&');
+        console.log(sURLVariables);
         for (var i = 0; i < sURLVariables.length; i++) {
             var sParameterName = sURLVariables[i].split('=');
             if (sParameterName[0] == parameter) {
+                console.log(sParameterName);
                 return sParameterName[1];
             }
         }

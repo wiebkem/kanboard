@@ -18,10 +18,10 @@
             <li><a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a></li>
             <?php if ((! isset($not_editable) || ! $not_editable) && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                 <li>
-                    <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->url->link(t('remove'), 'board', 'show', array('comment' => 'remove', 'task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                 </li>
                 <li>
-                    <?= $this->url->link(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->url->link(t('edit'), 'board', 'show', array('comment' => 'edit', 'task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                 </li>
             <?php endif ?>
         </ul>
