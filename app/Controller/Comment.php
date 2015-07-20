@@ -42,11 +42,13 @@ class Comment extends Base
     {
         $task = $this->getTask();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+        $redirect = $this->request->getStringParam('redirect');
 
         if (empty($values)) {
             $values = array(
                 'user_id' => $this->userSession->getId(),
                 'task_id' => $task['id'],
+                'redirect' => $redirect,
             );
         }
 
@@ -56,6 +58,7 @@ class Comment extends Base
                 'errors' => $errors,
                 'task' => $task,
                 'ajax' => $ajax,
+                'redirect' => $redirect,
             )));
         }
 
@@ -64,6 +67,7 @@ class Comment extends Base
             'errors' => $errors,
             'task' => $task,
             'title' => t('Add a comment'),
+            'redirect' => $redirect,
         )));
     }
 
@@ -77,6 +81,7 @@ class Comment extends Base
         $task = $this->getTask();
         $values = $this->request->getValues();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+        $redirect = $this->request->getStringParam('redirect');
 
         list($valid, $errors) = $this->comment->validateCreation($values);
 
@@ -93,7 +98,11 @@ class Comment extends Base
                 $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             }
 
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
+            if ($redirect === 'board') {
+                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+            } else {
+                $this->response->redirect($this->helper->url->to('board', 'show', array('popup' => 'true', 'task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
+            }
         }
 
         $this->create($values, $errors);

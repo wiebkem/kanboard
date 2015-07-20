@@ -10,6 +10,7 @@
             'project' => $project,
             'not_editable' => isset($not_editable) && $not_editable,
             'is_public' => isset($is_public) && $is_public,
+            'redirect' => $redirect,
         )) ?>
     <?php endforeach ?>
 
@@ -21,7 +22,8 @@
                     'task_id' => $task['id'],
                 ),
                 'errors' => array(),
-                'task' => $task
+                'task' => $task,
+                'redirect' => $redirect
         )) ?>
     <?php endif ?>
 </div>

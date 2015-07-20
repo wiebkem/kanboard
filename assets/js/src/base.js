@@ -2,7 +2,11 @@ var Kanboard = (function() {
 
     jQuery(document).ready(function() {
         Kanboard.Init();
-        Kanboard.OpenPopoverAutomatically();
+        var parameter = GetURLParameter('popup=true');
+        if (parameter != null) {
+            var url = window.location.replace('board', 'task');
+            Kanboard.OpenPopoverAutomatically('popup=true', url);
+        }
     });
 
     return {
@@ -63,8 +67,7 @@ var Kanboard = (function() {
         },
 
         // Display a popup automatically
-        OpenPopoverAutomatically: function(key, url) {
-            var parameter = GetURLParameter(key);
+        OpenPopoverAutomatically: function(parameter, url) {
             if (parameter != null) {
                 Kanboard.OpenPopover(url, Kanboard.InitAfterAjax);
             }

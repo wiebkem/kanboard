@@ -4,7 +4,7 @@
 </div>
 
 <section id="task-section">
-<form method="post" action="<?= $this->url->href('task', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('task', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
