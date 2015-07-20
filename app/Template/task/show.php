@@ -14,7 +14,7 @@
             <?= $this->render('task/show_basic_details', array('task' => $task, 'project' => $project)) ?>
         </div>
 
-    <form method="post" action="<?= $this->url->href('task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off" class="form-task">
+    <form method="post" action="<?= $this->url->href('board', 'show', array('taskmodification' => 'edit', 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off" class="form-task">
         <div class="page-footer">
             <div class="form-actions" style="float: right">
                 <input type="submit" value="<?= t('Edit') ?>" class="form-task btn btn-blue"/>

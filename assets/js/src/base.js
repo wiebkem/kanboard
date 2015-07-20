@@ -5,6 +5,7 @@ var Kanboard = (function() {
         var parameter = GetURLParameter('popup=true');
         Kanboard.OpenCommentPopoverAutomatically();
         Kanboard.OpenTaskPopoverAutomatically();
+        Kanboard.OpenEditTaskPopoverAutomatically();
     });
 
     return {
@@ -74,25 +75,29 @@ var Kanboard = (function() {
             }
         },
 
-        // Display a comment popup automatically
-        OpenCommentPopoverAutomatically: function() {
-            console.log('juhuuuuuuu');
-            var redirect = GetURLParameter('comment');
-            console.log(redirect);
+        // Display an edit task popup automatically
+        OpenEditTaskPopoverAutomatically: function() {
+            var redirect = GetURLParameter('taskmodification');
             if (redirect != null) {
-                var urlVariables = GetURLStrings('comment=remove');
-                console.log(urlVariables);
-                var popoverUrl = '?controller=comment&action=confirm' + urlVariables[1];
-                console.log('popoverUrl: ' + popoverUrl);
+                var urlVariables = GetURLStrings('taskmodification=edit');
+                var popoverUrl = '?controller=taskmodification&action=edit' + urlVariables[1];
                 Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
             }
+        },
+
+        // Display a comment popup automatically
+        OpenCommentPopoverAutomatically: function() {
+            var redirect = GetURLParameter('comment');
+            if (redirect != null) {
+                var urlVariables = GetURLStrings('comment=remove');
+                var popoverUrl = '?controller=comment&action=confirm' + urlVariables[1];
+                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
+            }
+
             redirect = GetURLParameter('comment');
-            console.log(redirect);
             if (redirect != null) {
                 var urlVariables = GetURLStrings('comment=edit');
-                console.log(urlVariables);
                 var popoverUrl = '?controller=comment&action=edit' + urlVariables[1];
-                console.log('popoverUrl: ' + popoverUrl);
                 Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
             }
         },
@@ -414,15 +419,11 @@ var Kanboard = (function() {
     };
 
     function GetURLParameter(parameter) {
-        console.log(parameter);
         var sPageURL = window.location.search.substring(1);
-        console.log(sPageURL);
         var sURLVariables = sPageURL.split('&');
-        console.log(sURLVariables);
         for (var i = 0; i < sURLVariables.length; i++) {
             var sParameterName = sURLVariables[i].split('=');
             if (sParameterName[0] == parameter) {
-                console.log(sParameterName);
                 return sParameterName[1];
             }
         }
