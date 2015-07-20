@@ -1,4 +1,7 @@
-<form method="post" action="<?= $this->url->href('taskmodification', 'time', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" class="form-inline task-time-form" autocomplete="off">
+<div id="description" class="task-show-section">
+    <div class="page-header">
+        <h2><?= t('Time') ?></h2>
+    </div>
 
     <?php if (empty($values['date_started'])): ?>
         <?= $this->url->link('<i class="fa fa-play"></i>', 'taskmodification', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-show-start-link', t('Set automatically the start date')) ?>
@@ -16,5 +19,4 @@
     <?= $this->form->label(t('Time spent'), 'time_spent') ?>
     <?= $this->form->numeric('time_spent', $values, array(), array('placeholder="'.t('hours').'"')) ?>
 
-    <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-</form>
+</div>

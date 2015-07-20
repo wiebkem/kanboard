@@ -1,6 +1,6 @@
 <div id="description" class="task-show-section">
     <div class="page-header">
-        <h2><?= t('Edit the description') ?></h2>
+        <h2><?= t('Description') ?></h2>
     </div>
 
     <?= $this->form->csrf() ?>
