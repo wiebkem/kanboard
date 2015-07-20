@@ -40,7 +40,7 @@ var Kanboard = (function() {
                 $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
 
                 $("#popover-container").click(function() {
-                    $(this).remove();
+                    Kanboard.ClosePopover();
                 });
 
                 $("#popover-content").click(function(e) {
@@ -49,11 +49,11 @@ var Kanboard = (function() {
 
                 $(".close-popover").click(function(e) {
                     e.preventDefault();
-                    $('#popover-container').remove();
+                    Kanboard.ClosePopover();
                 });
 
                 Mousetrap.bindGlobal("esc", function() {
-                    $('#popover-container').remove();
+                    Kanboard.ClosePopover();
                 });
 
                 if (callback) {
@@ -68,6 +68,11 @@ var Kanboard = (function() {
             if (parameter != null) {
                 Kanboard.OpenPopover(url, Kanboard.InitAfterAjax);
             }
+        },
+
+        ClosePopover: function() {
+            $('#popover-container').remove();
+            Kanboard.Screenshot.Destroy();
         },
 
         // Return true if the page is visible
@@ -255,6 +260,30 @@ var Kanboard = (function() {
                e.preventDefault();
                $("#form-search").val($(this).data("filter"));
                $("form.search").submit();
+            });
+
+            // Collapse sidebar
+            $(document).on("click", ".sidebar-collapse", function (e) {
+               e.preventDefault();
+               $(".sidebar-container").addClass("sidebar-collapsed");
+               $(".sidebar-expand").show();
+               $(".sidebar h2").hide();
+               $(".sidebar ul").hide();
+               $(".sidebar-collapse").hide();
+            });
+
+            // Expand sidebar
+            $(document).on("click", ".sidebar-expand", function (e) {
+               e.preventDefault();
+               $(".sidebar-container").removeClass("sidebar-collapsed");
+               $(".sidebar-collapse").show();
+               $(".sidebar h2").show();
+               $(".sidebar ul").show();
+               $(".sidebar-expand").hide();
+            });
+
+            $("select.task-reload-project-destination").change(function() {
+                window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
             });
 
             // Datepicker translation

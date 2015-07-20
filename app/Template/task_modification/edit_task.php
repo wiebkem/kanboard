@@ -15,6 +15,7 @@
         <?= $this->render('task/edit_time', array('task' => $task)) ?>
         <?= $this->render('file/show', array('task' => $task, 'files' => $files, 'images' => $images)) ?>
         <?= $this->render('task/comments', array('task' => $task, 'comments' => $comments, 'project' => $project, 'values' => $values, 'errors' => $errors)) ?>
+
     </div>
     <div class="edit-task-basic-details" style="float:right; width: 45%">
         <?= $this->render('task/edit_basic_details', array('task' => $task, 'project' => $project, 'values' => $values, 'errors' => $errors)) ?>

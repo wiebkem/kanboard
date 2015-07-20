@@ -26,6 +26,7 @@ Using Kanboard
 
 - [Creating tasks](creating-tasks.markdown)
 - [Closing tasks](closing-tasks.markdown)
+- [Duplicate and move tasks](duplicate-move-tasks.markdown)
 - [Adding screenshots](screenshots.markdown)
 - [Task links](task-links.markdown)
 - [Transitions](transitions.markdown)
@@ -110,7 +111,7 @@ Technical details
 
 - [LDAP authentication](ldap-authentication.markdown)
 - [Google authentication](google-authentication.markdown)
-- [GitHub authentication](github-authentication.markdown)
+- [Github authentication](github-authentication.markdown)
 - [Reverse proxy authentication](reverse-proxy-authentication.markdown)
 
 ### Contributors
