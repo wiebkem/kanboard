@@ -3,10 +3,7 @@ var Kanboard = (function() {
     jQuery(document).ready(function() {
         Kanboard.Init();
         var parameter = GetURLParameter('popup=true');
-        if (parameter != null) {
-            var url = window.location.replace('board', 'task');
-            Kanboard.OpenPopoverAutomatically('popup=true', url);
-        }
+        Kanboard.OpenTaskPopoverAutomatically();
     });
 
     return {
@@ -67,9 +64,12 @@ var Kanboard = (function() {
         },
 
         // Display a popup automatically
-        OpenPopoverAutomatically: function(parameter, url) {
-            if (parameter != null) {
-                Kanboard.OpenPopover(url, Kanboard.InitAfterAjax);
+        OpenTaskPopoverAutomatically: function() {
+            var redirect = GetURLParameter('popup');
+            if (redirect != null) {
+                var urlVariables = GetURLStrings('popup=true');
+                var popoverUrl = '?controller=task&action=show' + urlVariables[1];
+                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
             }
         },
 
@@ -398,6 +398,12 @@ var Kanboard = (function() {
                 return sParameterName[1];
             }
         }
+    }
+
+    function GetURLStrings(parameter) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split(parameter);
+        return sURLVariables;
     }
 
 })();
