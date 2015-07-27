@@ -68,27 +68,6 @@ class TaskValidator extends Base
     }
 
     /**
-     * Validate description creation
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateDescriptionCreation(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The id is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
      * Validate edit recurrence
      *
      * @access public

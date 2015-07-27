@@ -4,6 +4,7 @@ var Kanboard = (function() {
         Kanboard.Init();
         var parameter = GetURLParameter('popup=true');
         Kanboard.OpenCommentPopoverAutomatically();
+        Kanboard.OpenFilePopoverAutomatically();
         Kanboard.OpenTaskPopoverAutomatically();
         Kanboard.OpenEditTaskPopoverAutomatically();
     });
@@ -98,6 +99,23 @@ var Kanboard = (function() {
             if (redirect != null) {
                 var urlVariables = GetURLStrings('comment=edit');
                 var popoverUrl = '?controller=comment&action=edit' + urlVariables[1];
+                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
+            }
+        },
+
+        // Display a file popup automatically
+        OpenFilePopoverAutomatically: function() {
+            var redirect = GetURLParameter('file');
+            if (redirect != null) {
+                var urlVariables = GetURLStrings('file=remove');
+                var popoverUrl = '?controller=file&action=confirm' + urlVariables[1];
+                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
+            }
+
+            redirect = GetURLParameter('file');
+            if (redirect != null) {
+                var urlVariables = GetURLStrings('file=open');
+                var popoverUrl = '?controller=file&action=open' + urlVariables[1];
                 Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
             }
         },

@@ -1,10 +1,10 @@
-<div class="page-header">
-    <h2><?= t($this->e('Task #'.$task['id'])) ?><br />
-    <?= t($this->e('Title: ')) ?><?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"')) ?></h2><br/>
-</div>
-
 <section id="task-section">
 <form method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+
+    <div class="page-header">
+        <h2><?= t($this->e('Task #'.$task['id'])) ?><br />
+            <?= t($this->e('Title: ')) ?><?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"')) ?></h2><br/>
+    </div>
 
     <?= $this->form->csrf() ?>
 

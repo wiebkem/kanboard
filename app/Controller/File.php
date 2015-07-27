@@ -164,7 +164,7 @@ class File extends Base
             $this->session->flashError(t('Unable to remove this file.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('board', 'show', array('popup' => 'true', 'task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**
@@ -177,7 +177,7 @@ class File extends Base
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
-        $this->response->html($this->taskLayout('file/remove', array(
+        $this->response->html($this->template->render('file/remove', array(
             'task' => $task,
             'file' => $file,
         )));
