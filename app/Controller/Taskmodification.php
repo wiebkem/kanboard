@@ -154,7 +154,7 @@ class Taskmodification extends Base
                     $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
                 }
                 else {
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+                    $this->response->redirect($this->helper->url->to('board', 'show', array('popup' => 'true', 'task_id' => $task['id'],'project_id' => $task['project_id'])));
                 }
             }
             else {
