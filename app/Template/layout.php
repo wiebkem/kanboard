@@ -58,7 +58,8 @@
                     <?php endif ?>
                     <li>
                         <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
-                        <span class="username hide-tablet">(<?= $this->user->getProfileLink() ?>)</span>
+                        <span class="username hide-tablet">(<?= $this->user->getProfileLink() ?>
+                        <?= $this->user->avatar($this->user->getEmail()) ?>)</span>
                     </li>
                 </ul>
             </nav>

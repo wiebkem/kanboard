@@ -17,7 +17,7 @@
             <?= $this->form->label(t('Name'), 'name') ?>
             <?= $this->form->text('name', $values, $errors) ?><br/>
 
-            <?= $this->form->label(t('Email'), 'email') ?>
+            <?= $this->form->label(t('Email (user for gravatar.com)'), 'email') ?>
             <?= $this->form->email('email', $values, $errors) ?><br/>
 
             <?= $this->form->label(t('Password'), 'password') ?>

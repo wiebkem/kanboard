@@ -77,6 +77,17 @@ class User extends Base
     }
 
     /**
+     * Return the email
+     *
+     * @param  array    $user   User properties
+     * @return string
+     */
+    public function getEmail(array $user)
+    {
+        return $user['email'];
+    }
+
+    /**
      * Return true is the given user id is administrator
      *
      * @access public

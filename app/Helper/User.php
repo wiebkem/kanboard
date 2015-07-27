@@ -104,6 +104,17 @@ class User extends \Core\Base
     }
 
     /**
+     * Return the user email
+     *
+     * @access public
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->user->getEmail(empty($user) ? $_SESSION['user'] : $user);
+    }
+
+    /**
      * Display gravatar image
      *
      * @access public
