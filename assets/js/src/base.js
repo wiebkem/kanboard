@@ -3,10 +3,12 @@ var Kanboard = (function() {
     jQuery(document).ready(function() {
         Kanboard.Init();
         var parameter = GetURLParameter('popup=true');
-        Kanboard.OpenCommentPopoverAutomatically();
-        Kanboard.OpenFilePopoverAutomatically();
-        Kanboard.OpenTaskPopoverAutomatically();
-        Kanboard.OpenEditTaskPopoverAutomatically();
+        Kanboard.OpenPopoverAutomatically('popup', 'popup=true', 'task', 'show');
+        Kanboard.OpenPopoverAutomatically('taskmodification', 'taskmodification=edit', 'taskmodification', 'edit');
+        Kanboard.OpenPopoverAutomatically('comment', 'comment=remove', 'comment', 'confirm');
+        Kanboard.OpenPopoverAutomatically('comment', 'comment=edit', 'comment', 'edit');
+        Kanboard.OpenPopoverAutomatically('file', 'file=remove', 'file', 'confirm');
+        Kanboard.OpenPopoverAutomatically('file', 'file=open', 'file', 'open');
     });
 
     return {
@@ -66,56 +68,12 @@ var Kanboard = (function() {
             });
         },
 
-        // Display a task popup automatically
-        OpenTaskPopoverAutomatically: function() {
-            var redirect = GetURLParameter('popup');
+        // Display a popup automatically
+        OpenPopoverAutomatically: function(keyword, keyparameter, controller, action) {
+            var redirect = GetURLParameter(keyword);
             if (redirect != null) {
-                var urlVariables = GetURLStrings('popup=true');
-                var popoverUrl = '?controller=task&action=show' + urlVariables[1];
-                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
-            }
-        },
-
-        // Display an edit task popup automatically
-        OpenEditTaskPopoverAutomatically: function() {
-            var redirect = GetURLParameter('taskmodification');
-            if (redirect != null) {
-                var urlVariables = GetURLStrings('taskmodification=edit');
-                var popoverUrl = '?controller=taskmodification&action=edit' + urlVariables[1];
-                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
-            }
-        },
-
-        // Display a comment popup automatically
-        OpenCommentPopoverAutomatically: function() {
-            var redirect = GetURLParameter('comment');
-            if (redirect != null) {
-                var urlVariables = GetURLStrings('comment=remove');
-                var popoverUrl = '?controller=comment&action=confirm' + urlVariables[1];
-                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
-            }
-
-            redirect = GetURLParameter('comment');
-            if (redirect != null) {
-                var urlVariables = GetURLStrings('comment=edit');
-                var popoverUrl = '?controller=comment&action=edit' + urlVariables[1];
-                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
-            }
-        },
-
-        // Display a file popup automatically
-        OpenFilePopoverAutomatically: function() {
-            var redirect = GetURLParameter('file');
-            if (redirect != null) {
-                var urlVariables = GetURLStrings('file=remove');
-                var popoverUrl = '?controller=file&action=confirm' + urlVariables[1];
-                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
-            }
-
-            redirect = GetURLParameter('file');
-            if (redirect != null) {
-                var urlVariables = GetURLStrings('file=open');
-                var popoverUrl = '?controller=file&action=open' + urlVariables[1];
+                var urlVariables = GetURLStrings(keyparameter);
+                var popoverUrl = '?controller=' + controller + '&action=' + action + urlVariables[1];
                 Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
             }
         },

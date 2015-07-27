@@ -8,6 +8,7 @@
             <?= $this->render('subtask/show', array('task' => $task, 'subtasks' => $subtasks, 'project' => $project)) ?>
             <?= $this->render('task/time_tracking_summary', array('task' => $task)) ?>
             <?= $this->render('file/show', array('task' => $task, 'files' => $files, 'images' => $images)) ?>
+            <?= $this->render('file/new', array('task' => $task, 'max_size' => ini_get('upload_max_filesize'))) ?>
             <?= $this->render('task/comments', array('task' => $task, 'comments' => $comments, 'project' => $project, 'redirect' => 'task')) ?>
         </div>
         <div class="task-basic-details" style="float:right; width: 45%">
