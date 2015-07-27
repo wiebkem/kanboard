@@ -6,6 +6,14 @@ var Kanboard = (function() {
 
     return {
 
+        ShowLoadingIcon: function() {
+            $("body").append('<span id="app-loading-icon">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>');
+        },
+
+        HideLoadingIcon: function() {
+            $("#app-loading-icon").remove();
+        },
+
         // Return true if the element#id exists
         Exists: function(id) {
             if (document.getElementById(id)) {
@@ -273,8 +281,14 @@ var Kanboard = (function() {
                $(".sidebar-expand").hide();
             });
 
+            // Reload page when a destination project is changed
+            var reloading_project = false;
             $("select.task-reload-project-destination").change(function() {
-                window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
+                if (! reloading_project) {
+                    $(".loading-icon").show();
+                    reloading_project = true;
+                    window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
+                }
             });
 
             // Datepicker translation
