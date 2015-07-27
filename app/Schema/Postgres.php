@@ -211,7 +211,7 @@ function version_42($pdo)
 function version_41($pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('integration_gravatar', '0'));
+    $rq->execute(array('integration_gravatar', '1'));
 }
 
 function version_40($pdo)

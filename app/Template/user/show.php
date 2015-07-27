@@ -5,6 +5,13 @@
     <li><?= t('Username:') ?> <strong><?= $this->e($user['username']) ?></strong></li>
     <li><?= t('Name:') ?> <strong><?= $this->e($user['name']) ?: t('None') ?></strong></li>
     <li><?= t('Email:') ?> <strong><?= $this->e($user['email']) ?: t('None') ?></strong></li>
+    <?php if (! empty($user['email'])): ?>
+        <li>
+            <div class="GravatarLayout" style="position: relative; float: right; width:100%">
+                <?= $this->user->avatar($this->e($user['email'])) ?></strong>
+            </div>
+        </li>
+    <?php endif ?>
 </ul>
 
 <div class="page-header">

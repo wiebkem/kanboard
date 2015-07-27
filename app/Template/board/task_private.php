@@ -42,6 +42,10 @@
                 ) ?>
             </span>
 
+            <?php if ((! empty($task['owner_id']))): ?>
+                <span title="<?= t('Avatar') ?>" class="task-board-tooltip" style="float: right"><?= $this->user->avatar($this->user->getEmail($task['owner_id'])) ?></span>
+            <?php endif ?>
+
             <?php if ($task['is_active'] == 1): ?>
             <div class="task-board-days">
                 <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->dt->age($task['date_creation']) ?></span>

@@ -107,11 +107,12 @@ class User extends \Core\Base
      * Return the user email
      *
      * @access public
+     * @param  string    $user
      * @return string
      */
-    public function getEmail()
+    public function getEmail($user)
     {
-        return $this->user->getEmail(empty($user) ? $_SESSION['user'] : $user);
+        return $this->user->getEmail($this->user->getById($user));
     }
 
     /**
@@ -127,7 +128,6 @@ class User extends \Core\Base
         if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
             return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->helper->e($alt).'" title="'.$this->helper->e($alt).'">';
         }
-
         return '';
     }
 }

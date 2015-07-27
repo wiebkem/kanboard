@@ -3,6 +3,9 @@
     <?php if ($task['score']): ?>
         <span class="task-score"><?= $this->e($task['score']) ?></span>
     <?php endif ?>
+    <?php if ((! empty($task['owner_id']))): ?>
+        <span title="<?= t('Avatar') ?>" style="position: absolute; bottom: 10px; right: 20px"><?= $this->user->avatar($this->user->getEmail($task['owner_id'])) ?></span>
+    <?php endif ?>
     <ul>
         <?php if ($task['reference']): ?>
         <li>
