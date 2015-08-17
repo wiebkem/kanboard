@@ -125,7 +125,7 @@ class User extends \Core\Base
      */
     public function avatar($email, $alt = '')
     {
-        if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
+        if (! empty($email)) {
             return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->helper->e($alt).'" title="'.$this->helper->e($alt).'">';
         }
         return '';
